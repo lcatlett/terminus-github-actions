@@ -34,10 +34,13 @@ runs:
     - name: Install Terminus
       shell: bash
       run: |
-        mkdir $HOME/terminus && cd $HOME/terminus
+        mkdir -p $HOME/terminus && cd $HOME/terminus
         echo "Installing Terminus v$TERMINUS_RELEASE"
         curl -L https://github.com/pantheon-systems/terminus/releases/download/$TERMINUS_RELEASE/terminus.phar --output terminus
         chmod +x terminus
+        if [ -L /usr/local/bin/terminus ]; then
+          sudo rm /usr/local/bin/terminus
+        fi
         sudo ln -s $HOME/terminus/terminus /usr/local/bin/terminus
         mkdir -p $HOME/.terminus/{cache,plugins}
       env:
