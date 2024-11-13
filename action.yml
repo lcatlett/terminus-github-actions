@@ -41,7 +41,7 @@ runs:
         if [ -L /usr/local/bin/terminus ]; then
           sudo rm /usr/local/bin/terminus
         fi
-        sudo ln -s $HOME/terminus/terminus /usr/local/bin/terminus
+        sudo ln -sf $HOME/terminus/terminus /usr/local/bin/terminus
         mkdir -p $HOME/.terminus/{cache,plugins}
       env:
         TERMINUS_RELEASE: ${{ inputs.terminus-version || env.TERMINUS_RELEASE }}
